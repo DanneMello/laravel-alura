@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +10,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+#Criando rotas.
+Route::get('/series', 'SeriesController@index');
+Route::get('/series/criar', 'SeriesController@create');
+
