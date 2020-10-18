@@ -20,10 +20,12 @@
         {{ $serie->nome }}
 
         <form method="post" action="/series/{{ $serie->id }}"
-            onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome)}}')">
+            onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($serie->nome)}} ?')">
             @csrf
             @method('DELETE')
-            <button class="btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+            <button class="btn btn-danger btn-sm">
+                <i class="far fa-trash-alt"></i>
+            </button>
         </form>
     </li>
     @endforeach

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeriesFormRequest;
 use App\Serie;
 use Illuminate\Http\Request;
-
 class SeriesController extends Controller
 {
     public function index(Request $request) {
-
         $series = Serie::query()->orderby('nome')->get(); # Método hall, busca todos os registros inseridos no banco de dados
         $mensagem = $request->session()->get('mensagem');   # Buscando mensagem
 
@@ -20,9 +19,8 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(Request $request)
+    public function store(SeriesFormRequest $request)
     {
-
         $serie = Serie::create($request->all()); # Inserindo os dados no DB
         $request->session()->flash('mensagem', "Série {$serie->id} criada com sucesso {$serie->nome}");   # Definindo que existe uma mensagem nessa sessão.
         return redirect()->route('listar_series'); # Retornando usuário para lista
