@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Serie;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
     public function index(Request $request) {
 
-        $series = [
-            'Mr. Robot',
-            'Silicon Valley',
-            'How I Meet Your Mother'
-        ];
+        $series = Serie::query()->orderby('nome')->get(); # Método hall, busca todos os registros inseridos no banco de dados
+        $mensagem = $request->session()->get('mensagem');   # Buscando mensagem
 
-        $html = "<ul>";
-        foreach ($series as $serie){
-        $html .="<li>$serie</li>";
-        }
-        $html .= "</ul>";
-
-        return view('series.index', compact('series'));
+        return view('series.index', compact('series', 'mensagem')); # Passando por parâmetro a mensagem
     }
 
     public function create()
@@ -28,4 +20,18 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
+    public function store(Request $request)
+    {
+
+        $serie = Serie::create($request->all()); # Inserindo os dados no DB
+        $request->session()->flash('mensagem', "Série {$serie->id} criada com sucesso {$serie->nome}");   # Definindo que existe uma mensagem nessa sessão.
+        return redirect()->route('listar_series'); # Retornando usuário para lista
+    }
+
+    public function destroy(Request $request)
+    {
+        Serie::destroy($request->id) ; # removendo série
+        $request->session()->flash('mensagem', "Série removida com sucesso");   # Mensagem informativa
+        return redirect()->route('listar_series'); # Retornando usuário para lista
+    }
 }
