@@ -14,3 +14,4 @@ Route::post('/series/criar', 'SeriesController@store'); # Definindo rota para qu
 Route::delete('/series/{id}', 'SeriesController@destroy'); # Remove série
 
 
+Route::get('/series/{serieId}/temporadas', 'TemporadasController@index');
