@@ -55,3 +55,4 @@ class SeriesController extends Controller
         return redirect()->route('listar_series'); // Retornando usuário para lista
     }
 }
+

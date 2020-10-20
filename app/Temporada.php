@@ -19,3 +19,4 @@ class Temporada extends Model
         return $this->belongsTo(Serie::class); // Essa temporada pertence a uma série
     }
 }
+
