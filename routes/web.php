@@ -1,8 +1,11 @@
 <?php
 
 #Criando rotas.
+
+
 Route::get('/series', 'SeriesController@index')
     ->name('listar_series');
+
 Route::get('/series/criar', 'SeriesController@create')
     ->name('form_criar_serie');
 
@@ -18,3 +21,10 @@ Route::post('/temporadas/{temporada}/episodios/assistir', 'EpisodiosController@a
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/entrar', 'EntrarController@index');
+Route::post('/entrar', 'EntrarController@entrar');
+
+Route::get('/registrar', 'RegistroController@create');
+Route::post('/registrar', 'RegistroController@store');
+
+
