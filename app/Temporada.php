@@ -30,3 +30,4 @@ class Temporada extends Model
         });
     }
 }
+
